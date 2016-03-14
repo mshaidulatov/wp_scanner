@@ -45,8 +45,7 @@ class check_files {
     }
     
     public function send_report($emails) {
-        
-        $message = $this->search_files();
+        $files = $this->search_files();
         if ($emails=="") {
             return "No emails to send";
         }
@@ -55,6 +54,10 @@ class check_files {
         }
         $time = current_time('Y-m-d H:m:s',1);
         $subject = get_bloginfo('name').". File changes report($time)";
+        $message = "Following files were changed since last scan: \n";
+        foreach ($files as $file) {
+            $message .= $file."\n";
+        }
         foreach ($emails as $email) {
             wp_mail($email,$subject,$message);
         }

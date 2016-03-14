@@ -24,6 +24,10 @@
                 <td><input type="text" name="pattern" value="<?php echo get_option('pattern') ?>" /></td>
             </tr>
              <tr valign="top">
+                <th scope="row">Post types</th>
+                <td><input type="text" name="post_types" value="<?php echo get_option('post_types') ?>" /></td>
+            </tr>
+            <tr valign="top">
                 <th scope="row">Inform emails</th>
                 <td><input type="text" name="emails" value="<?php echo get_option('emails') ?>" /></td>
             </tr>

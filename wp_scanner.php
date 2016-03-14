@@ -14,6 +14,7 @@ function init_admin_page() {
     register_setting('wp_scanner','pattern');
     register_setting('wp_scanner','emails');
     register_setting('wp_scanner','scan_interval');
+    register_setting('wp_scanner','post_types');
 }
 
 function add_admin_page() {
@@ -23,27 +24,24 @@ function add_admin_page() {
 function plugin_options_page() {
     include("admin_page.php");
     if (get_option('scan_interval') > 0) {
-        add_filter('cron_schedules','cron_add_scan_interval');
-        add_action('wp','activate_int');
-        add_action('scan_event','scan_action');
-        update_option('last_scan_time',time());
+        var_dump(wp_next_scheduled('scan_event'));
+        if (!wp_next_scheduled('scan_event')) {
+            wp_shedule_event(time(),'scan_interval','scan_event');
+            update_option('last_scan_time',time());            
+        }
     }
     else {
         wp_clear_sheduled_hook('scan_event');
     }
+
 }
 
 function cron_add_scan_interval($schedules) {
     $schedules['scan_interval'] = array(
-        'interval' => 3600 * get_option('scan_interval'),
-        'display' => 'Scan interval for WP Scan Site'
+        'interval' => 30,
+        'display' => __('Scan interval for WP Scan Site')
     );
     return $schedules;
-}
-
-function activate_int() {
-    wp_clear_sheduled_hook('scan_event');
-    wp_shedule_event(time(),'scan_interval','scan_event');
 }
 
 function scan_action() {
@@ -62,12 +60,18 @@ function scan_files() {
     $check_files->last_time = get_option('last_time');
     $check_files->directories = explode(',',get_option('directories'));
     $check_files->pattern = get_option('pattern');
-    $check_files->send_report(explode(',',get_option('emails')));
+    echo $check_files->send_report(explode(',',get_option('emails')));
 }
 
 function scan_posts() {
     include("check_posts.php");
+    $check_posts = new check_posts();
+    $check_posts->last_time = get_option('last_time');
+    $check_posts->posts_type = get_option('post_types');
+    echo $check_posts->send_report(explode(',',get_option('emails')));
 }
 
+add_filter('cron_schedules','cron_add_scan_interval');
+add_action('scan_event','scan_action');
 add_action('admin_menu','add_admin_page');
 add_action('admin_init','init_admin_page');
