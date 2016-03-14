@@ -34,10 +34,7 @@ function plugin_options_page() {
         wp_clear_sheduled_hook('scan_event');
     }
 */
-    echo date("Y-m-d H:m:s", get_option('last_scan_time'))."<br/>";
     scan_action();
-    echo "<br/>";
-    echo date("Y-m-d H:m:s", get_option('last_scan_time'));
     update_option('last_scan_time',current_time('timestamp',0));
 }
 
