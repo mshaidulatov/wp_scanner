@@ -6,3 +6,68 @@
     Version: 1.0
     */
 
+function init_admin_page() {
+    register_setting('wp_scanner','last_scan_time');
+    register_setting('wp_scanner','enable_posts_scan');
+    register_setting('wp_scanner','enable_files_scan');
+    register_setting('wp_scanner','directories');
+    register_setting('wp_scanner','pattern');
+    register_setting('wp_scanner','emails');
+    register_setting('wp_scanner','scan_interval');
+}
+
+function add_admin_page() {
+    add_options_page("Scan Site Plugin Settings","Scan Site Plugin",'administrator',"scaner","plugin_options_page");
+}
+
+function plugin_options_page() {
+    include("admin_page.php");
+    if (get_option('scan_interval') > 0) {
+        add_filter('cron_schedules','cron_add_scan_interval');
+        add_action('wp','activate_int');
+        add_action('scan_event','scan_action');
+        update_option('last_scan_time',time());
+    }
+    else {
+        wp_clear_sheduled_hook('scan_event');
+    }
+}
+
+function cron_add_scan_interval($schedules) {
+    $schedules['scan_interval'] = array(
+        'interval' => 3600 * get_option('scan_interval'),
+        'display' => 'Scan interval for WP Scan Site'
+    );
+    return $schedules;
+}
+
+function activate_int() {
+    wp_clear_sheduled_hook('scan_event');
+    wp_shedule_event(time(),'scan_interval','scan_event');
+}
+
+function scan_action() {
+    if (get_option('enable_files_scan')==1) {
+        scan_files();
+    }
+    if (get_option('enable_posts_scan')==1) {
+        scan_posts();
+    }
+    update_option('last_scan_time',time());
+}
+
+function scan_files() {
+    include("check_files.php");
+    $check_files = new check_files();
+    $check_files->last_time = get_option('last_time');
+    $check_files->directories = explode(',',get_option('directories'));
+    $check_files->pattern = get_option('pattern');
+    $check_files->send_report(explode(',',get_option('emails')));
+}
+
+function scan_posts() {
+    include("check_posts.php");
+}
+
+add_action('admin_menu','add_admin_page');
+add_action('admin_init','init_admin_page');
