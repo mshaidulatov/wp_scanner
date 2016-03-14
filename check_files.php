@@ -37,11 +37,11 @@ class check_files {
         foreach ($result as $file) {
             $filetime = filemtime($file);
             if ($filetime > $this->last_time) {
-                $message = $file.": ".date("Y-m-d H:m:s",filemtime($file)).";";
-                array_push($file_array,$message);
+                $message = $file.": ".date("Y-m-d H:m:s",$filetime).";";
+                $file_array[] = $message;
             }
         }
-        return $message;
+        return $file_array;
     }
     
     public function send_report($emails) {
@@ -49,10 +49,10 @@ class check_files {
         if ($emails=="") {
             return "No emails to send";
         }
-        if ($message=="") {
+        if ($files=="") {
             return "No file chaged since last scan";
         }
-        $time = current_time('Y-m-d H:m:s',1);
+        $time = current_time('Y-m-d H:m:s',0);
         $subject = get_bloginfo('name').". File changes report($time)";
         $message = "Following files were changed since last scan: \n";
         foreach ($files as $file) {

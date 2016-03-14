@@ -23,9 +23,9 @@ function add_admin_page() {
 
 function plugin_options_page() {
     include("admin_page.php");
-    if (get_option('scan_interval') > 0) {
-        var_dump(wp_next_scheduled('scan_event'));
+/*    if (get_option('scan_interval') > 0) {
         if (!wp_next_scheduled('scan_event')) {
+            add_filter('cron_schedules','cron_add_scan_interval');
             wp_shedule_event(time(),'scan_interval','scan_event');
             update_option('last_scan_time',time());            
         }
@@ -33,7 +33,12 @@ function plugin_options_page() {
     else {
         wp_clear_sheduled_hook('scan_event');
     }
-
+*/
+    echo date("Y-m-d H:m:s", get_option('last_scan_time'))."<br/>";
+    scan_action();
+    echo "<br/>";
+    echo date("Y-m-d H:m:s", get_option('last_scan_time'));
+    update_option('last_scan_time',current_time('timestamp',0));
 }
 
 function cron_add_scan_interval($schedules) {
@@ -57,21 +62,20 @@ function scan_action() {
 function scan_files() {
     include("check_files.php");
     $check_files = new check_files();
-    $check_files->last_time = get_option('last_time');
+    $check_files->last_time = get_option('last_scan_time');
     $check_files->directories = explode(',',get_option('directories'));
     $check_files->pattern = get_option('pattern');
-    echo $check_files->send_report(explode(',',get_option('emails')));
+    $check_files->send_report(explode(',',get_option('emails')));
 }
 
 function scan_posts() {
     include("check_posts.php");
     $check_posts = new check_posts();
-    $check_posts->last_time = get_option('last_time');
-    $check_posts->posts_type = get_option('post_types');
-    echo $check_posts->send_report(explode(',',get_option('emails')));
+    $check_posts->last_time = get_option('last_scan_time');
+    $check_posts->post_types = explode(',',get_option('post_types'));
+    $check_posts->send_report(explode(',',get_option('emails')));
 }
 
-add_filter('cron_schedules','cron_add_scan_interval');
 add_action('scan_event','scan_action');
 add_action('admin_menu','add_admin_page');
 add_action('admin_init','init_admin_page');
