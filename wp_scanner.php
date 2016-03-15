@@ -3,7 +3,7 @@
     Plugin Name: WP Scan Site
     Description: Plugin for checking site changes
     Author: M. Olefirenko
-    Version: 1.3.2
+    Version: 1.3.3
     */
 
 function init_admin_page() {
@@ -88,6 +88,7 @@ function wp_scripts_add() {
     wp_enqueue_script('modal',plugin_dir_url( __FILE__ ).'sticky_menu/modal.js');
     wp_enqueue_script('stickytab',plugin_dir_url( __FILE__ ).'sticky_menu/stickytab.js');
     wp_enqueue_style('modal',plugin_dir_url( __FILE__ ).'sticky_menu/modal.css');
+    wp_enqueue_style('stickytab',plugin_dir_url( __FILE__ ).'sticky_menu/_stickytab.css');
 }
 
 require 'plugin-update-checker/plugin-update-checker.php';

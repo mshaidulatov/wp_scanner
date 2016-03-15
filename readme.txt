@@ -21,6 +21,10 @@ Update based on https://github.com/YahnisElsts/plugin-update-checker
 Just  copy it to wordpress plugin folder
 
 ==Changelog==
+=1.3.3=
+*Release Date - 15 March 2016*
+* Added style for sticky menu
+
 =1.3.2=
 *Release Date - 15 March 2016*
 * Email in feedbck form get from options
