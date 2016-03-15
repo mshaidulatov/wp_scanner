@@ -21,6 +21,10 @@ Update based on https://github.com/YahnisElsts/plugin-update-checker
 Just  copy it to wordpress plugin folder
 
 ==Changelog==
+=1.3=
+*Release Date - 15 March 2016*
+* Added parameters for sticky panel
+
 =1.2=
 *Release Date - 15 March 2016*
 * Fix GitHub repository link

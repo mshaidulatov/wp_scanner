@@ -3,7 +3,7 @@
     Plugin Name: WP Scan Site
     Description: Plugin for checking site changes
     Author: M. Olefirenko
-    Version: 1.2
+    Version: 1.3
     */
 
 function init_admin_page() {
@@ -15,6 +15,12 @@ function init_admin_page() {
     register_setting('wp_scanner','emails');
     register_setting('wp_scanner','scan_interval');
     register_setting('wp_scanner','post_types');
+    register_setting('wp_scanner','call_back');
+    register_setting('wp_scanner','call_back_phone');
+    register_setting('wp_scanner','feedback');
+    register_setting('wp_scanner','feedback_email');
+    register_setting('wp_scanner','search_form');
+    register_setting('wp_scanner','menu');
 }
 
 function add_admin_page() {
