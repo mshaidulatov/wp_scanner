@@ -22,6 +22,9 @@ Update based on https://github.com/YahnisElsts/plugin-update-checker
 Just  copy it to wordpress plugin folder
 
 == Changelog ==
+= 1.1 =
+
+* Add auto update from github
 
 = 1.0 =
 
