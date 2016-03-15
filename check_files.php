@@ -49,7 +49,7 @@ class check_files {
         if ($emails=="") {
             return "No emails to send";
         }
-        if ($files=="") {
+        if (empty($files)) {
             return "No file chaged since last scan";
         }
         $time = current_time('Y-m-d H:m:s',0);

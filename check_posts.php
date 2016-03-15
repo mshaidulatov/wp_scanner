@@ -33,7 +33,7 @@ class check_posts {
                 $message .= $post."\n";
             }
             foreach ($emails as $email) {
-                wp_mail($mail,$subject,$message);
+                wp_mail($email,$subject,$message);
             }
         }
         return $message;
