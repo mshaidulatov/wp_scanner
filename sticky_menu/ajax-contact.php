@@ -1,7 +1,7 @@
 <?php
 // the E-Mail address that you want to recieve the message on.
 //$to_email = 'info@clearcutwebdesign.co.uk';
-$to_email = 'marat.shaidulatov@entellsolutions.com';
+$to_email = get_option('feedback_email');
 if (isset($_POST)) {
 	// recieve the form variables and secure them
 	//$email = trim(strip_tags(addslashes($_POST['email'])));

@@ -21,6 +21,14 @@ Update based on https://github.com/YahnisElsts/plugin-update-checker
 Just  copy it to wordpress plugin folder
 
 ==Changelog==
+=1.3.2=
+*Release Date - 15 March 2016*
+* Email in feedbck form get from options
+
+=1.3.1=
+*Release Date - 15 March 2016*
+* Added pages in plugin menu
+
 =1.3=
 *Release Date - 15 March 2016*
 * Added parameters for sticky panel
