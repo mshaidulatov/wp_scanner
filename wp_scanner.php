@@ -15,20 +15,25 @@ function init_admin_page() {
     register_setting('wp_scanner','emails');
     register_setting('wp_scanner','scan_interval');
     register_setting('wp_scanner','post_types');
-    register_setting('wp_scanner','call_back');
-    register_setting('wp_scanner','call_back_phone');
-    register_setting('wp_scanner','feedback');
-    register_setting('wp_scanner','feedback_email');
-    register_setting('wp_scanner','search_form');
-    register_setting('wp_scanner','menu');
+    register_setting('wp_scanner_menu','call_back');
+    register_setting('wp_scanner_menu','call_back_phone');
+    register_setting('wp_scanner_menu','feedback');
+    register_setting('wp_scanner_menu','feedback_email');
+    register_setting('wp_scanner_menu','search_form');
+    register_setting('wp_scanner_menu','menu');
 }
 
 function add_admin_page() {
-    add_options_page("Scan Site Plugin Settings","Scan Site Plugin",'administrator',"scaner","plugin_options_page");
+    add_options_page("Scan Site Plugin Settings","Scan Site Plugin",'administrator',"scaner","plugin_options_page1");
+    add_options_page("Scan Site Plugin Settings","Sticky Menu",'administrator',"sticky_menu","plugin_options_page2");
 }
 
-function plugin_options_page() {
+function plugin_options_page1() {
     include("admin_page.php");
+}
+
+function plugin_options_page2() {
+    include("admin_page_menu.php");
 }
 
 function cron_add_scan_interval($schedules) {
@@ -73,9 +78,17 @@ function scan_posts() {
     return $check_posts->send_report(explode(',',get_option('emails')));
 }
 
-add_action('scan_event','scan_action');
-add_action('admin_menu','add_admin_page');
-add_action('admin_init','init_admin_page');
+function wp_head_add() {
+    include('sticky_menu/modal.php');
+    include('sticky_menu/stickytab.php');
+}
+
+function wp_scripts_add() {
+    wp_enqueue_script('ajax-contact',plugin_dir_url( __FILE__ ).'sticky_menu/ajax-contact.js');
+    wp_enqueue_script('modal',plugin_dir_url( __FILE__ ).'sticky_menu/modal.js');
+    wp_enqueue_script('stickytab',plugin_dir_url( __FILE__ ).'sticky_menu/stickytab.js');
+    wp_enqueue_style('modal',plugin_dir_url( __FILE__ ).'sticky_menu/modal.css');
+}
 
 require 'plugin-update-checker/plugin-update-checker.php';
 $className = PucFactory::getLatestClassVersion('PucGitHubChecker');
@@ -85,3 +98,8 @@ $myUpdateChecker = new $className(
     'master'
 );
 
+add_action('scan_event','scan_action');
+add_action('admin_menu','add_admin_page');
+add_action('admin_init','init_admin_page');
+add_action('wp_head','wp_head_add');
+add_action('wp_enqueue_scripts','wp_scripts_add');
