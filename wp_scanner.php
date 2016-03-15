@@ -23,19 +23,7 @@ function add_admin_page() {
 
 function plugin_options_page() {
     include("admin_page.php");
-/*    if (get_option('scan_interval') > 0) {
-        if (!wp_next_scheduled('scan_event')) {
-            add_filter('cron_schedules','cron_add_scan_interval');
-            wp_shedule_event(time(),'scan_interval','scan_event');
-            update_option('last_scan_time',time());            
-        }
-    }
-    else {
-        wp_clear_sheduled_hook('scan_event');
-    }
-*/
-    scan_action(false);
-    update_option('last_scan_time',current_time('timestamp',0));
+    //update_option('last_scan_time',current_time('timestamp',0));
 }
 
 function cron_add_scan_interval($schedules) {
@@ -60,6 +48,7 @@ function scan_action($output) {
         echo $files_output."<br/>";
         echo $posts_output."<br/>";
     }
+    update_option('last_scan_time',current_time('timestamp',0));
 }
 
 function scan_files() {
@@ -79,11 +68,14 @@ function scan_posts() {
     return $check_posts->send_report(explode(',',get_option('emails')));
 }
 
-function scan_from_page() {
-    scan_action(true);
-}
-
 add_action('scan_event','scan_action');
 add_action('admin_menu','add_admin_page');
 add_action('admin_init','init_admin_page');
-add_action('scan_from_page','scan_from_page');
+
+require 'plugin-update-checker/plugin-update-checker.php';
+$className = PucFactory::getLatestClassVersion('PucGitHubChecker');
+$myUpdateChecker = new $className(
+    'https://github.com/molefirenko/wp_scanner.git',
+    __FILE__,
+    'master'
+);
