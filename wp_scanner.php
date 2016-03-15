@@ -3,7 +3,7 @@
     Plugin Name: WP Scan Site
     Description: Plugin for checking site changes
     Author: M. Olefirenko
-    Version: 1.3.3
+    Version: 1.3.4
     */
 
 function init_admin_page() {
@@ -21,6 +21,8 @@ function init_admin_page() {
     register_setting('wp_scanner_menu','feedback_email');
     register_setting('wp_scanner_menu','search_form');
     register_setting('wp_scanner_menu','menu');
+    register_setting('wp_scanner','scan_date');
+    set_cron_job();    
 }
 
 function add_admin_page() {
@@ -36,15 +38,18 @@ function plugin_options_page2() {
     include("admin_page_menu.php");
 }
 
-function cron_add_scan_interval($schedules) {
-    $schedules['scan_interval'] = array(
-        'interval' => 30,
-        'display' => __('Scan interval for WP Scan Site')
-    );
-    return $schedules;
+function set_cron_job() {
+    if ( ! wp_next_scheduled( 'scan_cron_action' ) ) {
+        wp_schedule_event( time(), 'twicedaily', 'scan_cron_action' );
+    }    
+}
+
+function deactivate_plugin() {
+    wp_clear_scheduled_hook('scan_cron_action');
 }
 
 function scan_action($output) {
+    update_option('scan_date',date("Y-m-d H:m:s",current_time('timestamp',0)));
     $files_output = "";
     $posts_output = "";
     if (get_option('enable_files_scan')==1) {
@@ -104,3 +109,6 @@ add_action('admin_menu','add_admin_page');
 add_action('admin_init','init_admin_page');
 add_action('wp_head','wp_head_add');
 add_action('wp_enqueue_scripts','wp_scripts_add');
+add_action('scan_cron_action','scan_action');
+register_deactivation_hook(__FILE__, 'deactivate_plugin');
+

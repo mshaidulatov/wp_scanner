@@ -21,6 +21,10 @@ Update based on https://github.com/YahnisElsts/plugin-update-checker
 Just  copy it to wordpress plugin folder
 
 ==Changelog==
+=1.3.4=
+*Release Date - 15 March 2016*
+* Added cron job for scan twice a day
+
 =1.3.3=
 *Release Date - 15 March 2016*
 * Added style for sticky menu
