@@ -74,7 +74,8 @@ add_action('admin_init','init_admin_page');
 require 'plugin-update-checker/plugin-update-checker.php';
 $className = PucFactory::getLatestClassVersion('PucGitHubChecker');
 $myUpdateChecker = new $className(
-    'https://github.com/molefirenko/wp_scanner.git',
+    'https://github.com/molefirenko/wp_scanner/',
     __FILE__,
     'master'
 );
+
