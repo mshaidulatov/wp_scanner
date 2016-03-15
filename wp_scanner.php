@@ -23,7 +23,6 @@ function add_admin_page() {
 
 function plugin_options_page() {
     include("admin_page.php");
-    //update_option('last_scan_time',current_time('timestamp',0));
 }
 
 function cron_add_scan_interval($schedules) {
