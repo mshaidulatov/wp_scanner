@@ -1,5 +1,6 @@
 <div class="wrap">
-    <h2>Sticky menu options page</h2> 
+    <h2>Sticky menu options page</h2>
+    <?php settings_errors(); ?>
     <form method="post" action="options.php">
         <?php settings_fields( 'wp_scanner_menu' ); ?>
         <table class="form-table">

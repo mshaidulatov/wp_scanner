@@ -1,4 +1,4 @@
-===WP Scan Site ===
+=== CW Tools ===
 Requires at least: 4.0.0
 Tested up to: 4.4.2
 Stable tag: 4.4.2
@@ -21,6 +21,14 @@ Update based on https://github.com/YahnisElsts/plugin-update-checker
 Just  copy it to wordpress plugin folder
 
 ==Changelog==
+=1.4.1=
+*Release Date - 16 March 2016*
+* Create Scripts submenu
+
+=1.4.0=
+*Release Date - 16 March 2016*
+* Create own menu with submenus
+
 =1.3.6=
 *Release Date - 16 March 2016*
 * Inform emails move back to scaner page
