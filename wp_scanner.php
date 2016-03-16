@@ -3,7 +3,7 @@
     Plugin Name: WP Scan Site
     Description: Plugin for checking site changes
     Author: M. Olefirenko
-    Version: 1.3.5
+    Version: 1.3.6
     */
 
 function init_admin_page() {

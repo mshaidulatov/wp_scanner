@@ -21,6 +21,10 @@ Update based on https://github.com/YahnisElsts/plugin-update-checker
 Just  copy it to wordpress plugin folder
 
 ==Changelog==
+=1.3.6=
+*Release Date - 16 March 2016*
+* Inform emails move back to scaner page
+
 =1.3.5=
 *Release Date - 16 March 2016*
 * Added js scripts for sticky menu

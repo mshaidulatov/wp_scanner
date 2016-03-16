@@ -27,6 +27,10 @@
                 <th scope="row">Post types</th>
                 <td><input type="text" name="post_types" value="<?php echo get_option('post_types') ?>" /></td>
             </tr>
+            <tr valign="top">
+                <th scope="row">Inform emails</th>
+                <td><input type="text" name="emails" value="<?php echo get_option('emails') ?>" /></td>
+            </tr>            
         </table>
         <p class="submit"><input type="submit" value="<?php _e('Save changes') ?>" /></p>
     </form>

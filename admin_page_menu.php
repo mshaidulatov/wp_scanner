@@ -4,10 +4,6 @@
         <?php settings_fields( 'wp_scanner_menu' ); ?>
         <table class="form-table">
              <tr valign="top">
-                <th scope="row">Inform emails</th>
-                <td><input type="text" name="emails" value="<?php echo get_option('emails') ?>" /></td>
-            </tr>
-             <tr valign="top">
                 <th scope="row">Call back</th>
                 <td><input type="text" name="call_back_phone" value="<?php echo get_option('call_back_phone') ?>" />
                     <input type="checkbox" name="call_back" value="1" <?php checked(1 == get_option('call_back')); ?> />
