@@ -3,7 +3,7 @@
     Plugin Name: WP Scan Site
     Description: Plugin for checking site changes
     Author: M. Olefirenko
-    Version: 1.3.4
+    Version: 1.3.5
     */
 
 function init_admin_page() {
@@ -89,6 +89,8 @@ function wp_head_add() {
 }
 
 function wp_scripts_add() {
+    wp_enqueue_script('verge',plugin_dir_url( __FILE__ ).'sticky_menu/verge.min.js');
+    wp_enqueue_script('owl_carousel',plugin_dir_url( __FILE__ ).'sticky_menu/owl.carousel.js');
     wp_enqueue_script('ajax-contact',plugin_dir_url( __FILE__ ).'sticky_menu/ajax-contact.js');
     wp_enqueue_script('modal',plugin_dir_url( __FILE__ ).'sticky_menu/modal.js');
     wp_enqueue_script('stickytab',plugin_dir_url( __FILE__ ).'sticky_menu/stickytab.js');
