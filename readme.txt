@@ -23,6 +23,10 @@ Just  copy it to wordpress plugin folder
 ==Changelog==
 =1.4.1=
 *Release Date - 16 March 2016*
+* Added css for Sticky menu
+
+=1.4.1=
+*Release Date - 16 March 2016*
 * Create Scripts submenu
 
 =1.4.0=
