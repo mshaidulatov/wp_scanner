@@ -24,6 +24,14 @@
                 <th scope="row">Sticky tab</th>
                 <td><input type="checkbox" name="stickytab" value="1" <?php checked(1 == get_option('stickytab')); ?> /></td>
             </tr>            
+            <tr valign="top">
+                <th scope="row">Sticky tab css</th>
+                <td><input type="checkbox" name="stickytab_css" value="1" <?php checked(1 == get_option('stickytab_css')); ?> /></td>
+            </tr>
+            <tr valign="top">
+                <th scope="row">Modal css</th>
+                <td><input type="checkbox" name="modal_css" value="1" <?php checked(1 == get_option('modal_css')); ?> /></td>
+            </tr>
         </table>
         <p class="submit"><input type="submit" value="<?php _e('Save changes') ?>" /></p>
     </form>
