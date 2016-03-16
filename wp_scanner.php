@@ -29,6 +29,8 @@ function init_admin_page() {
     register_setting('wp_scripts_menu','ajax-contact');
     register_setting('wp_scripts_menu','modal');
     register_setting('wp_scripts_menu','stickytab');
+    register_setting('wp_scripts_menu','stickytab_css');
+    register_setting('wp_scripts_menu','modal_css');
     set_cron_job();    
 }
 
@@ -121,9 +123,12 @@ function wp_scripts_add() {
     if (get_option("stickytab") == 1) {
         wp_enqueue_script('stickytab',plugin_dir_url( __FILE__ ).'sticky_menu/stickytab.js');
     }
-    wp_enqueue_style('stickytab',plugin_dir_url( __FILE__ ).'sticky_menu/_stickytab.css');
-    wp_enqueue_style('modal',plugin_dir_url( __FILE__ ).'sticky_menu/modal.css');
-    
+    if (get_option("stickytab_css") == 1) {
+        wp_enqueue_style('stickytab',plugin_dir_url( __FILE__ ).'sticky_menu/_stickytab.css');
+    }
+    if (get_option("modal_css") == 1) {
+        wp_enqueue_style('modal',plugin_dir_url( __FILE__ ).'sticky_menu/modal.css');
+    }
 }
 
 require 'plugin-update-checker/plugin-update-checker.php';
@@ -141,4 +146,3 @@ add_action('wp_head','wp_head_add');
 add_action('wp_enqueue_scripts','wp_scripts_add');
 add_action('scan_cron_action','scan_action');
 register_deactivation_hook(__FILE__, 'deactivate_plugin');
-

@@ -21,7 +21,7 @@ Update based on https://github.com/YahnisElsts/plugin-update-checker
 Just  copy it to wordpress plugin folder
 
 ==Changelog==
-=1.4.1=
+=1.4.2=
 *Release Date - 16 March 2016*
 * Added css for Sticky menu
 
