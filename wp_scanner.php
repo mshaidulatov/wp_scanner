@@ -3,7 +3,7 @@
     Plugin Name: CW Tools
     Description: Plugin for checking site changes
     Author: M. Olefirenko
-    Version: 1.4.3
+    Version: 1.4.4
     */
 
 function init_admin_page() {
@@ -30,8 +30,7 @@ function init_admin_page() {
     register_setting('wp_scripts_menu','modal');
     register_setting('wp_scripts_menu','stickytab');
     register_setting('wp_scripts_menu','stickytab_css');
-    register_setting('wp_scripts_menu','modal_css');
-    set_cron_job();    
+    register_setting('wp_scripts_menu','modal_css');   
 }
 
 function add_admin_page() {    
@@ -43,10 +42,16 @@ function add_admin_page() {
 
 function cw_menu_page() {
    include("admin_page.php"); 
+   add_filter( 'cron_schedules', 'add_my_interval' );
+   set_cron_job();
+   echo wp_next_scheduled( 'scan_cron_action' );
 }
 
 function plugin_options_page1() {
     include("admin_page.php");
+    add_filter( 'cron_schedules', 'add_my_interval' );
+    set_cron_job();
+    echo date("H:m:s",wp_next_scheduled( 'scan_cron_action' ));
 }
 
 function plugin_options_page2() {
@@ -59,7 +64,7 @@ function plugin_options_page3() {
 
 function set_cron_job() {
     if ( ! wp_next_scheduled( 'scan_cron_action' ) ) {
-        wp_schedule_event( time(), 'twicedaily', 'scan_cron_action' );
+        wp_schedule_event( time(), 'my_interval', 'scan_cron_action' );
     }    
 }
 
@@ -131,6 +136,15 @@ function wp_scripts_add() {
     }
 }
 
+function add_my_interval( $schedules ) {
+    $schedules['my_interval'] = array(
+        'interval' => 3600*intval(get_option('scan_interval')),
+        'display' => __('My Interval')
+    );
+    return $schedules;
+}
+
+
 require 'plugin-update-checker/plugin-update-checker.php';
 $className = PucFactory::getLatestClassVersion('PucGitHubChecker');
 $myUpdateChecker = new $className(
@@ -139,7 +153,6 @@ $myUpdateChecker = new $className(
     'master'
 );
 
-add_action('scan_event','scan_action');
 add_action('admin_menu','add_admin_page');
 add_action('admin_init','init_admin_page');
 add_action('wp_head','wp_head_add');
