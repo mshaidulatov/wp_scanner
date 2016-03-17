@@ -44,14 +44,12 @@ function cw_menu_page() {
    include("admin_page.php"); 
    add_filter( 'cron_schedules', 'add_my_interval' );
    set_cron_job();
-   echo wp_next_scheduled( 'scan_cron_action' );
 }
 
 function plugin_options_page1() {
     include("admin_page.php");
     add_filter( 'cron_schedules', 'add_my_interval' );
     set_cron_job();
-    echo date("H:m:s",wp_next_scheduled( 'scan_cron_action' ));
 }
 
 function plugin_options_page2() {
