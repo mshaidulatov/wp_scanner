@@ -3,7 +3,7 @@
     Plugin Name: CW Tools
     Description: Plugin for checking site changes
     Author: M. Olefirenko
-    Version: 1.4.5
+    Version: 1.4.6
     */
 
 function init_admin_page() {

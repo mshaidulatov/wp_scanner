@@ -46,14 +46,17 @@ class check_files {
     
     public function send_report($emails) {
         $files = $this->search_files();
-        $subject = get_bloginfo('name').". File changes report($time)";
         $time = current_time('Y-m-d H:m:s',0);
+        $subject = get_bloginfo('name').". File changes report($time)";
+
         if ($emails=="") {
             return "No emails to send";
         }
         if (empty($files)) {
             $message = "No file chaged since last scan";
-            wp_mail($email,$subject,$message);
+            foreach ($emails as $email) {
+                wp_mail($email,$subject,$message);
+            }
             return "No file chaged since last scan";
         }
         $time = current_time('Y-m-d H:m:s',0);

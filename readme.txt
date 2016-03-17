@@ -21,8 +21,11 @@ Update based on https://github.com/YahnisElsts/plugin-update-checker
 Just  copy it to wordpress plugin folder
 
 ==Changelog==
+=1.4.6=
+*Release Date - 17 March 2016*
+
 =1.4.5=
-*Release Date - 16 March 2016*
+*Release Date - 17 March 2016*
 * Removed service info
 
 =1.4.4=
