@@ -1,10 +1,11 @@
-<?php 
-    /*
-    Plugin Name: CW Tools
-    Description: Plugin for checking site changes
-    Author: M. Olefirenko
-    Version: 1.4.6
-    */
+<?php
+
+/*
+Plugin Name: CW Tools
+Description: Plugin for checking site changes
+Author: M. Olefirenko
+Version: 1.4.7
+*/
 
 function init_admin_page() {
     register_setting('wp_scanner','last_scan_time');
@@ -146,7 +147,7 @@ function add_my_interval( $schedules ) {
 require 'plugin-update-checker/plugin-update-checker.php';
 $className = PucFactory::getLatestClassVersion('PucGitHubChecker');
 $myUpdateChecker = new $className(
-    'https://github.com/molefirenko/wp_scanner/',
+    'https://github.com/mshaidulatov/wp_scanner/',
     __FILE__,
     'master'
 );
