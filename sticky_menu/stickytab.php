@@ -15,9 +15,9 @@
         <div>
             <form id="mobile-contact" class="ajax-contact" method="post">
                 <label for="telephone-mobile">Phone</label>
-                <input id="telephone-mobile" name="phone number" type="tel"  class="required" placeholder="Phone *" autocorrect="off" autocomplete="tel" tabindex="1">
+                <input id="telephone-mobile" name="phone number" type="tel"  class="required" placeholder="Phone *"  tabindex="1">
                 <label for="email-mobile">Email</label>
-                <input id="email-mobile" name="email_address" type="email" class="required data-email" placeholder="email@email.com *" autocapitalize="off" autocorrect="off" autocomplete="email" tabindex="2">
+                <input id="email-mobile" name="email_address" type="email" class="required data-email" placeholder="email@email.com *"   autocomplete="on" tabindex="2">
                 <input class="submit_contact" type="submit" value="SEND">
             </form>
         </div>

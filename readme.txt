@@ -21,6 +21,11 @@ Update based on https://github.com/YahnisElsts/plugin-update-checker
 Just  copy it to wordpress plugin folder
 
 ==Changelog==
+
+=1.4.7=
+*Release Date - 18 March 2016*
+* Fixed validation errors in contact form, fixed styles in forms
+
 =1.4.6=
 *Release Date - 17 March 2016*
 
